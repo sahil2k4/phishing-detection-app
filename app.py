@@ -1,4 +1,17 @@
 
+import sys
+import types
+
+try:
+    import fcntl
+except ModuleNotFoundError:
+    class _DummyFcntl(types.ModuleType):
+        def __getattr__(self, name):
+            def _missing(*args, **kwargs):
+                return None
+            return _missing
+    sys.modules["fcntl"] = _DummyFcntl("fcntl")
+
 from flask import Flask, request, jsonify, render_template
 import pandas as pd
 import joblib
@@ -15,20 +28,28 @@ BASE_DIR = os.path.dirname(
 )
 
 
-model = joblib.load(
-    os.path.join(
-        BASE_DIR,
-        "url_phishing_model.pkl"
+try:
+    model = joblib.load(
+        os.path.join(
+            BASE_DIR,
+            "url_phishing_model.pkl"
+        )
     )
-)
+except Exception as e:
+    print(f"Warning: Failed to load model: {e}")
+    model = None
 
 
-feature_names = joblib.load(
-    os.path.join(
-        BASE_DIR,
-        "url_model_features.pkl"
+try:
+    feature_names = joblib.load(
+        os.path.join(
+            BASE_DIR,
+            "url_model_features.pkl"
+        )
     )
-)
+except Exception as e:
+    print(f"Warning: Failed to load features: {e}")
+    feature_names = []
 
 
 def extract_url_features(url):
