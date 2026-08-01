@@ -49,7 +49,7 @@ logger.info(f"Features path: {features_path}")
 logger.info(f"Features exist: {os.path.exists(features_path)}")
 
 try:
-    model = joblib.load(model_path)
+    model = joblib.load(model_path, allow_pickle=True)
     logger.info("Model loaded successfully")
 except Exception as e:
     logger.error(f"Failed to load model: {e}", exc_info=True)
@@ -57,7 +57,7 @@ except Exception as e:
 
 
 try:
-    feature_names = joblib.load(features_path)
+    feature_names = joblib.load(features_path, allow_pickle=True)
     logger.info(f"Features loaded successfully: {len(feature_names)} features")
 except Exception as e:
     logger.error(f"Failed to load features: {e}", exc_info=True)
