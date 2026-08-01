@@ -1,6 +1,10 @@
 
 import sys
 import types
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 try:
     import fcntl
@@ -27,28 +31,36 @@ BASE_DIR = os.path.dirname(
     os.path.abspath(__file__)
 )
 
+logger.info(f"Base directory: {BASE_DIR}")
+logger.info(f"Files in BASE_DIR: {os.listdir(BASE_DIR) if os.path.isdir(BASE_DIR) else 'N/A'}")
+
+model_path = os.path.join(
+    BASE_DIR,
+    "url_phishing_model.pkl"
+)
+features_path = os.path.join(
+    BASE_DIR,
+    "url_model_features.pkl"
+)
+
+logger.info(f"Model path: {model_path}")
+logger.info(f"Model exists: {os.path.exists(model_path)}")
+logger.info(f"Features path: {features_path}")
+logger.info(f"Features exist: {os.path.exists(features_path)}")
 
 try:
-    model = joblib.load(
-        os.path.join(
-            BASE_DIR,
-            "url_phishing_model.pkl"
-        )
-    )
+    model = joblib.load(model_path)
+    logger.info("Model loaded successfully")
 except Exception as e:
-    print(f"Warning: Failed to load model: {e}")
+    logger.error(f"Failed to load model: {e}", exc_info=True)
     model = None
 
 
 try:
-    feature_names = joblib.load(
-        os.path.join(
-            BASE_DIR,
-            "url_model_features.pkl"
-        )
-    )
+    feature_names = joblib.load(features_path)
+    logger.info(f"Features loaded successfully: {len(feature_names)} features")
 except Exception as e:
-    print(f"Warning: Failed to load features: {e}")
+    logger.error(f"Failed to load features: {e}", exc_info=True)
     feature_names = []
 
 
