@@ -1,0 +1,1462 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+PhishGuard AI | URL Security Scanner
+</title>
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}"
+>
+
+</head>
+
+
+<body>
+
+
+<!-- BACKGROUND -->
+
+<div class="background-grid"></div>
+
+<div class="orb orb-one"></div>
+
+<div class="orb orb-two"></div>
+
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🛡
+            </div>
+
+            <div>
+
+                <div class="brand-name">
+
+                    PhishGuard
+
+                    <span>AI</span>
+
+                </div>
+
+                <div class="brand-subtitle">
+                    Intelligent URL Security
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="status-pill">
+
+            <span class="status-dot"></span>
+
+            ML Security Engine Active
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- MAIN -->
+
+<main class="main-container">
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+
+    <div class="hero-badge">
+
+        ✦ MACHINE LEARNING SECURITY
+
+    </div>
+
+
+    <h1>
+
+        Detect Phishing
+
+        <span>
+            Before It Detects You
+        </span>
+
+    </h1>
+
+
+    <p class="hero-description">
+
+        Analyze suspicious URLs instantly using
+        machine learning and automatically extracted
+        URL security characteristics.
+
+    </p>
+
+
+
+    <!-- SCANNER -->
+
+    <div class="scanner-card">
+
+
+        <div class="scanner-header">
+
+            <div>
+
+                <div class="scanner-title">
+                    URL Security Scanner
+                </div>
+
+                <div class="scanner-subtitle">
+                    Paste any URL below to begin analysis
+                </div>
+
+            </div>
+
+
+            <div class="scanner-status">
+
+                <span></span>
+
+                READY
+
+            </div>
+
+        </div>
+
+
+
+        <form id="urlForm">
+
+
+            <label for="url">
+
+                WEBSITE URL
+
+            </label>
+
+
+            <div class="url-input-wrapper">
+
+
+                <div class="url-icon">
+
+                    🔗
+
+                </div>
+
+
+                <input
+                    type="text"
+                    id="url"
+                    autocomplete="off"
+                    placeholder="https://example.com/login"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    id="analyzeButton"
+                >
+
+                    <span>
+                        🛡
+                    </span>
+
+                    Analyze URL
+
+                </button>
+
+
+            </div>
+
+        </form>
+
+
+
+        <div class="quick-info">
+
+
+            <div>
+
+                <span>⚡</span>
+
+                <p>
+
+                    <strong>
+                        Instant Analysis
+                    </strong>
+
+                    Automatic feature extraction
+
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <span>🔒</span>
+
+                <p>
+
+                    <strong>
+                        Safer Analysis
+                    </strong>
+
+                    URL structure based
+
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <span>🤖</span>
+
+                <p>
+
+                    <strong>
+                        ML Powered
+                    </strong>
+
+                    Random Forest model
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- LOADING -->
+
+        <div
+            id="loading"
+            class="loading hidden"
+        >
+
+
+            <div class="scan-animation">
+
+                <div class="scanner-line"></div>
+
+                🛡
+
+            </div>
+
+
+            <h3>
+                Analyzing URL...
+            </h3>
+
+
+            <p>
+
+                Extracting security characteristics
+                and running machine learning analysis.
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- ERROR -->
+
+        <div
+            id="error"
+            class="error-box hidden"
+        ></div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- RESULT -->
+
+<section
+    id="result"
+    class="result-section hidden"
+>
+
+
+    <div class="section-heading">
+
+        <span>
+            SECURITY REPORT
+        </span>
+
+        <h2>
+            Website Analysis Result
+        </h2>
+
+        <p>
+            Machine learning risk assessment
+            based on URL characteristics.
+        </p>
+
+    </div>
+
+
+
+    <div
+        id="resultCard"
+        class="result-card"
+    >
+
+
+        <!-- RESULT HEADER -->
+
+        <div class="result-header">
+
+
+            <div
+                id="resultIcon"
+                class="result-icon"
+            >
+            </div>
+
+
+            <div class="result-heading">
+
+
+                <span class="analysis-label">
+                    FINAL ASSESSMENT
+                </span>
+
+
+                <h2 id="resultTitle">
+                </h2>
+
+
+                <p id="checkedUrl">
+                </p>
+
+
+            </div>
+
+
+            <div
+                id="riskBadge"
+                class="risk-badge"
+            >
+            </div>
+
+
+        </div>
+
+
+
+        <!-- RISK SCORE -->
+
+        <div class="risk-panel">
+
+
+            <div class="risk-score-area">
+
+
+                <span class="small-title">
+                    PHISHING RISK SCORE
+                </span>
+
+
+                <div class="score-circle">
+
+
+                    <div>
+
+                        <strong
+                            id="mainRiskScore"
+                        >
+                            0
+                        </strong>
+
+                        <span>%</span>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="probability-area">
+
+
+                <!-- LEGITIMATE -->
+
+                <div class="probability-block">
+
+
+                    <div class="probability-header">
+
+
+                        <div>
+
+                            <span class="probability-icon safe">
+                                ✓
+                            </span>
+
+                            Legitimate
+
+                        </div>
+
+
+                        <strong
+                            id="legitimateScore"
+                        >
+                            0%
+                        </strong>
+
+
+                    </div>
+
+
+                    <div class="progress-track">
+
+                        <div
+                            id="legitimateBar"
+                            class="progress-fill legitimate"
+                        ></div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- PHISHING -->
+
+                <div class="probability-block">
+
+
+                    <div class="probability-header">
+
+
+                        <div>
+
+                            <span class="probability-icon danger">
+                                !
+                            </span>
+
+                            Phishing Risk
+
+                        </div>
+
+
+                        <strong
+                            id="phishingScore"
+                        >
+                            0%
+                        </strong>
+
+
+                    </div>
+
+
+                    <div class="progress-track">
+
+                        <div
+                            id="phishingBar"
+                            class="progress-fill phishing"
+                        ></div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- INDICATORS -->
+
+        <div class="analysis-grid">
+
+
+            <div class="analysis-card">
+
+
+                <div class="analysis-card-header">
+
+
+                    <div class="card-icon">
+                        ⚠
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            URL Indicators
+                        </h3>
+
+                        <p>
+                            Characteristics detected
+                            during analysis
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <div
+                    id="indicatorList"
+                    class="indicator-list"
+                >
+                </div>
+
+
+            </div>
+
+
+
+            <div class="analysis-card">
+
+
+                <div class="analysis-card-header">
+
+
+                    <div class="card-icon">
+                        ⚙
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Analysis Engine
+                        </h3>
+
+                        <p>
+                            Deployment information
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="engine-list">
+
+
+                    <div>
+
+                        <span>Model</span>
+
+                        <strong>
+                            Random Forest
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Input</span>
+
+                        <strong>
+                            URL Features
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Analysis</span>
+
+                        <strong>
+                            Automatic
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Status</span>
+
+                        <strong class="online">
+                            ● Online
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- TECHNICAL FEATURES -->
+
+        <div class="technical-section">
+
+
+            <button
+                type="button"
+                class="technical-toggle"
+                onclick="toggleTechnical()"
+            >
+
+
+                <div>
+
+
+                    <span class="technical-icon">
+                        &lt;/&gt;
+                    </span>
+
+
+                    <div>
+
+                        <strong>
+                            Technical Analysis
+                        </strong>
+
+                        <small>
+                            View automatically extracted
+                            machine learning features
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+                <span
+                    id="toggleArrow"
+                    class="toggle-arrow"
+                >
+                    ↓
+                </span>
+
+
+            </button>
+
+
+
+            <div
+                id="technicalContent"
+                class="technical-content hidden"
+            >
+
+
+                <div
+                    id="featureTable"
+                    class="feature-grid"
+                >
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- DISCLAIMER -->
+
+        <div class="security-notice">
+
+
+            <div>
+                ℹ
+            </div>
+
+
+            <p>
+
+                <strong>
+                    Security Notice
+                </strong>
+
+                This result is a machine-learning-based
+                risk assessment. It should not be treated
+                as definitive proof that a website is safe
+                or malicious.
+
+            </p>
+
+
+        </div>
+
+
+
+        <div class="scan-again">
+
+
+            <button
+                onclick="scanAgain()"
+                class="scan-again-button"
+            >
+
+                ↻ Scan Another URL
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- HOW IT WORKS -->
+
+<section class="how-section">
+
+
+    <div class="section-heading">
+
+
+        <span>
+            HOW IT WORKS
+        </span>
+
+
+        <h2>
+            Intelligent URL Analysis
+        </h2>
+
+
+        <p>
+            From URL submission to security
+            prediction in three stages.
+        </p>
+
+
+    </div>
+
+
+
+    <div class="steps-grid">
+
+
+        <div class="step-card">
+
+
+            <div class="step-number">
+                01
+            </div>
+
+
+            <div class="step-icon">
+                🔗
+            </div>
+
+
+            <h3>
+                Enter URL
+            </h3>
+
+
+            <p>
+                Submit the website URL you
+                want to analyze.
+            </p>
+
+
+        </div>
+
+
+
+        <div class="step-card">
+
+
+            <div class="step-number">
+                02
+            </div>
+
+
+            <div class="step-icon">
+                ⚙
+            </div>
+
+
+            <h3>
+                Extract Features
+            </h3>
+
+
+            <p>
+                URL characteristics are
+                calculated automatically.
+            </p>
+
+
+        </div>
+
+
+
+        <div class="step-card">
+
+
+            <div class="step-number">
+                03
+            </div>
+
+
+            <div class="step-icon">
+                🛡
+            </div>
+
+
+            <h3>
+                Predict Risk
+            </h3>
+
+
+            <p>
+                Random Forest evaluates the
+                extracted characteristics.
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<footer>
+
+
+    <div class="footer-brand">
+
+        <span>
+            🛡
+        </span>
+
+        PhishGuard AI
+
+    </div>
+
+
+    <p>
+        Machine Learning Phishing Website Detection System
+    </p>
+
+
+    <small>
+        Educational machine learning project
+    </small>
+
+
+</footer>
+
+
+</main>
+
+
+
+<script>
+
+
+const form =
+    document.getElementById("urlForm");
+
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+
+        event.preventDefault();
+
+
+        const url =
+            document
+            .getElementById("url")
+            .value
+            .trim();
+
+
+        const loading =
+            document.getElementById(
+                "loading"
+            );
+
+
+        const error =
+            document.getElementById(
+                "error"
+            );
+
+
+        const result =
+            document.getElementById(
+                "result"
+            );
+
+
+        const button =
+            document.getElementById(
+                "analyzeButton"
+            );
+
+
+        error.classList.add(
+            "hidden"
+        );
+
+
+        result.classList.add(
+            "hidden"
+        );
+
+
+        loading.classList.remove(
+            "hidden"
+        );
+
+
+        button.disabled = true;
+
+
+        button.innerHTML =
+            "⏳ Analyzing...";
+
+
+        try {
+
+
+            const response =
+                await fetch(
+                    "/predict",
+                    {
+
+                        method:
+                            "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify({
+                                url: url
+                            })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            loading.classList.add(
+                "hidden"
+            );
+
+
+            button.disabled = false;
+
+
+            button.innerHTML =
+                "<span>🛡</span> Analyze URL";
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.error ||
+                    "Prediction failed."
+                );
+
+            }
+
+
+            displayResult(data);
+
+
+        }
+
+        catch (err) {
+
+
+            loading.classList.add(
+                "hidden"
+            );
+
+
+            button.disabled = false;
+
+
+            button.innerHTML =
+                "<span>🛡</span> Analyze URL";
+
+
+            error.innerHTML =
+                "<strong>Analysis Error</strong><br>" +
+                err.message;
+
+
+            error.classList.remove(
+                "hidden"
+            );
+
+
+        }
+
+
+    }
+);
+
+
+
+function displayResult(data) {
+
+
+    const result =
+        document.getElementById(
+            "result"
+        );
+
+
+    const card =
+        document.getElementById(
+            "resultCard"
+        );
+
+
+    const icon =
+        document.getElementById(
+            "resultIcon"
+        );
+
+
+    const title =
+        document.getElementById(
+            "resultTitle"
+        );
+
+
+    const riskBadge =
+        document.getElementById(
+            "riskBadge"
+        );
+
+
+    result.classList.remove(
+        "hidden"
+    );
+
+
+    document.getElementById(
+        "checkedUrl"
+    ).innerText =
+        data.url;
+
+
+    document.getElementById(
+        "legitimateScore"
+    ).innerText =
+        Number(
+            data.legitimate_probability
+        ).toFixed(2) + "%";
+
+
+    document.getElementById(
+        "phishingScore"
+    ).innerText =
+        Number(
+            data.phishing_probability
+        ).toFixed(2) + "%";
+
+
+    document.getElementById(
+        "mainRiskScore"
+    ).innerText =
+        Math.round(
+            data.phishing_probability
+        );
+
+
+    setTimeout(
+        function() {
+
+
+            document.getElementById(
+                "legitimateBar"
+            ).style.width =
+                data.legitimate_probability
+                + "%";
+
+
+            document.getElementById(
+                "phishingBar"
+            ).style.width =
+                data.phishing_probability
+                + "%";
+
+
+        },
+        100
+    );
+
+
+    if (
+        data.prediction ===
+        "Phishing"
+    ) {
+
+
+        card.classList.remove(
+            "safe-card"
+        );
+
+
+        card.classList.add(
+            "danger-card"
+        );
+
+
+        icon.innerText =
+            "!";
+
+
+        icon.className =
+            "result-icon danger-icon";
+
+
+        title.innerText =
+            "Potential Phishing Detected";
+
+
+        riskBadge.innerText =
+            "HIGH RISK";
+
+
+        riskBadge.className =
+            "risk-badge high-risk";
+
+
+    }
+
+    else {
+
+
+        card.classList.remove(
+            "danger-card"
+        );
+
+
+        card.classList.add(
+            "safe-card"
+        );
+
+
+        icon.innerText =
+            "✓";
+
+
+        icon.className =
+            "result-icon safe-icon";
+
+
+        title.innerText =
+            "Likely Legitimate";
+
+
+        riskBadge.innerText =
+            "LOWER RISK";
+
+
+        riskBadge.className =
+            "risk-badge low-risk";
+
+
+    }
+
+
+    const indicatorList =
+        document.getElementById(
+            "indicatorList"
+        );
+
+
+    indicatorList.innerHTML = "";
+
+
+    data.indicators.forEach(
+        function(indicator) {
+
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "indicator-item";
+
+
+            item.innerHTML = `
+
+                <div class="indicator-symbol">
+                    •
+                </div>
+
+                <span>
+                    ${indicator}
+                </span>
+
+            `;
+
+
+            indicatorList.appendChild(
+                item
+            );
+
+
+        }
+    );
+
+
+    const featureTable =
+        document.getElementById(
+            "featureTable"
+        );
+
+
+    featureTable.innerHTML = "";
+
+
+    Object.entries(
+        data.features
+    ).forEach(
+        function([name, value]) {
+
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "feature-item";
+
+
+            const formattedName =
+                name
+                .replaceAll("_", " ")
+                .replace(
+                    /\b\w/g,
+                    function(letter) {
+                        return letter.toUpperCase();
+                    }
+                );
+
+
+            let formattedValue =
+                value;
+
+
+            if (
+                typeof value ===
+                "number" &&
+                !Number.isInteger(value)
+            ) {
+
+                formattedValue =
+                    value.toFixed(4);
+
+            }
+
+
+            row.innerHTML = `
+
+                <span>
+                    ${formattedName}
+                </span>
+
+                <strong>
+                    ${formattedValue}
+                </strong>
+
+            `;
+
+
+            featureTable.appendChild(
+                row
+            );
+
+
+        }
+    );
+
+
+    result.scrollIntoView({
+
+        behavior:
+            "smooth",
+
+        block:
+            "start"
+
+    });
+
+
+}
+
+
+
+function toggleTechnical() {
+
+
+    const content =
+        document.getElementById(
+            "technicalContent"
+        );
+
+
+    const arrow =
+        document.getElementById(
+            "toggleArrow"
+        );
+
+
+    content.classList.toggle(
+        "hidden"
+    );
+
+
+    if (
+        content.classList.contains(
+            "hidden"
+        )
+    ) {
+
+        arrow.innerText =
+            "↓";
+
+    }
+
+    else {
+
+        arrow.innerText =
+            "↑";
+
+    }
+
+
+}
+
+
+
+function scanAgain() {
+
+
+    document.getElementById(
+        "url"
+    ).value = "";
+
+
+    document.getElementById(
+        "result"
+    ).classList.add(
+        "hidden"
+    );
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior:
+            "smooth"
+
+    });
+
+
+    setTimeout(
+        function() {
+
+            document.getElementById(
+                "url"
+            ).focus();
+
+        },
+        500
+    );
+
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
