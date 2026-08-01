@@ -246,6 +246,12 @@ def predict():
 
     try:
 
+        if model is None or not feature_names:
+            return jsonify({
+                "error":
+                "Model is not available. Please try again later."
+            }), 503
+
         data = request.get_json()
 
         if not data or not data.get("url"):
