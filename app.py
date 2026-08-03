@@ -16,6 +16,16 @@ except ModuleNotFoundError:
             return _missing
     sys.modules["fcntl"] = _DummyFcntl("fcntl")
 
+# Patch numpy to provide missing ComplexWarning for older pickled models
+try:
+    import numpy
+    if not hasattr(numpy.core.numeric, 'ComplexWarning'):
+        class ComplexWarning(Warning):
+            pass
+        numpy.core.numeric.ComplexWarning = ComplexWarning
+except Exception:
+    pass
+
 from flask import Flask, request, jsonify, render_template
 import pandas as pd
 import joblib
