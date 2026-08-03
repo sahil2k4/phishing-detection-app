@@ -1,6 +1,6 @@
 Flask
 pandas
-numpy
+numpy<2.0
 scikit-learn==1.3.0
 joblib
 lime
